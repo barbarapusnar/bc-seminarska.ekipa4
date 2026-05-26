@@ -6,7 +6,7 @@
             "request": "launch",
             "type": "al",
             "environmentType": "OnPrem",
-            "server": "http://bcsandbox",
+            "server": "http://172.23.102.129",
             "serverInstance": "BC",
             "port": 7049,
             "authentication": "UserPassword",
