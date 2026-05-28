@@ -6,7 +6,7 @@
             "request": "launch",
             "type": "al",
             "environmentType": "OnPrem",
-            "server": "http://172.30.242.48",
+            "server": "http://172.19.24.179",
             "serverInstance": "BC",
             "port": 7049,
             "authentication": "UserPassword",
