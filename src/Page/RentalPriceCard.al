@@ -1,8 +1,8 @@
-page 50101 "Rental Type Card"
+page 50108 "Rental Price Card"
 {
     PageType = Card;
-    SourceTable = "Rental Type";
-    Caption = 'Rental Type';
+    SourceTable = "Rental Price List";
+    Caption = 'Rental Price';
 
     layout
     {
@@ -12,10 +12,10 @@ page 50101 "Rental Type Card"
             {
                 field(Code; Rec.Code) { ApplicationArea = All; }
                 field(Description; Rec.Description) { ApplicationArea = All; }
+                field("Rental Type Code"; Rec."Rental Type Code") { ApplicationArea = All; }
+                field("Starting Date"; Rec."Starting Date") { ApplicationArea = All; }
+                field("Ending Date"; Rec."Ending Date") { ApplicationArea = All; }
                 field("Daily Rate"; Rec."Daily Rate") { ApplicationArea = All; }
-                field("Max Rental Days"; Rec."Max Rental Days") { ApplicationArea = All; }
-                field("Requires Deposit"; Rec."Requires Deposit") { ApplicationArea = All; }
-                field("Deposit Amount"; Rec."Deposit Amount") { ApplicationArea = All; }
             }
         }
     }
