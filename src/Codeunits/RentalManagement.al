@@ -5,6 +5,8 @@ codeunit 50100 "Rental Management"
         RentalLine: Record "Rental Line";
         Bicycle: Record Bicycle;
     begin
+        CheckMaxActiveRentals(RentalHeader."Customer No.");
+
         if RentalHeader.Status <> RentalHeader.Status::Open then
             Error('Rental must have status Open to start.');
 
@@ -59,5 +61,25 @@ codeunit 50100 "Rental Management"
         RentalHeader."Actual Return Date" := Today;
         RentalHeader.Status := RentalHeader.Status::Returned;
         RentalHeader.Modify();
+    end;
+
+    local procedure CheckMaxActiveRentals(CustomerNo: Code[20])
+    var
+        RentalHeader: Record "Rental Header";
+        Customer: Record Customer;
+        ActiveCount: Integer;
+    begin
+        if not Customer.Get(CustomerNo) then
+            exit;
+
+        if Customer."Max Active Rentals" = 0 then
+            exit;
+
+        RentalHeader.SetRange("Customer No.", CustomerNo);
+        RentalHeader.SetRange(Status, RentalHeader.Status::Active);
+        ActiveCount := RentalHeader.Count();
+
+        if ActiveCount >= Customer."Max Active Rentals" then
+            Error('Stranka je že dosegla maksimalno dovoljeno število aktivnih izposoj.');
     end;
 }
