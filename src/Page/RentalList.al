@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 page 50104 "Rental List"
 {
     PageType = List;
@@ -29,48 +28,9 @@ page 50104 "Rental List"
             {
                 Caption = 'Open Card';
                 ApplicationArea = All;
-                RunObject = page "Rental Card";
-                RunPageLink = "No." = field("No.");
+                Image = Report;
+                RunObject = report "Rental Report";
             }
         }
     }
 }
-=======
-page 50104 "Rental List"
-{
-    PageType = List;
-    SourceTable = "Rental Header";
-    Caption = 'Rentals';
-
-    layout
-    {
-        area(content)
-        {
-            repeater(Group)
-            {
-                field("No."; Rec."No.") { ApplicationArea = All; }
-                field("Customer No."; Rec."Customer No.") { ApplicationArea = All; }
-                field("Rental Date"; Rec."Rental Date") { ApplicationArea = All; }
-                field("Expected Return Date"; Rec."Expected Return Date") { ApplicationArea = All; }
-                field(Status; Rec.Status) { ApplicationArea = All; }
-                field("Total Amount"; Rec."Total Amount") { ApplicationArea = All; }
-            }
-        }
-    }
-
-    actions
-    {
-        area(processing)
-        {
-            action(Card)
-            {
-                Caption = 'Open Card';
-                ApplicationArea = All;
-                RunObject = page "Rental Card";
-                RunPageLink = "No." = field("No.");
-            }
-        }
-    }
-}
-
->>>>>>> bf1e63840ca6977a55f64fc506860ab3392cd86b

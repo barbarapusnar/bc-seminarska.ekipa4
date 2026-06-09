@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 table 50101 Bicycle
 {
     Caption = 'Bicycle';
@@ -6,144 +5,28 @@ table 50101 Bicycle
 
     fields
     {
-        field(1; "No."; Code[20])
-        {
-            Caption = 'No.';
-            NotBlank = true;
-        }
+        field(1; "No."; Code[20]) { }
 
         field(2; "Rental Type Code"; Code[20])
         {
-            Caption = 'Rental Type Code';
             TableRelation = "Rental Type".Code;
-
-            trigger OnValidate()
-            var
-                RentalType: Record "Rental Type";
-            begin
-                if RentalType.Get("Rental Type Code") then
-                    Description := RentalType.Description;
-            end;
         }
 
-        field(3; Description; Text[100])
-        {
-            Caption = 'Description';
-        }
+        field(3; Description; Text[100]) { }
 
-        field(4; Status; Enum "Bicycle Status")
-        {
-            Caption = 'Status';
-            InitValue = Available;
-        }
+        field(4; Status; Enum "Bicycle Status") { }
 
-        field(5; "Purchase Date"; Date)
-        {
-            Caption = 'Purchase Date';
-        }
+        field(5; "Purchase Date"; Date) { }
 
-        field(6; "Purchase Price"; Decimal)
-        {
-            Caption = 'Purchase Price';
+        field(6; "Purchase Price"; Decimal) { }
 
-            trigger OnValidate()
-            begin
-                if "Purchase Price" < 0 then
-                    Error('Purchase Price cannot be negative.');
-            end;
-        }
+        field(7; "Current Location"; Text[50]) { }
 
-        field(7; "Current Location"; Text[50])
-        {
-            Caption = 'Current Location';
-        }
-
-        field(8; "Last Service Date"; Date)
-        {
-            Caption = 'Last Service Date';
-        }
+        field(8; "Last Service Date"; Date) { }
     }
 
     keys
     {
-        key(PK; "No.")
-        {
-            Clustered = true;
-        }
+        key(PK; "No.") { Clustered = true; }
     }
 }
-=======
-table 50101 Bicycle
-{
-    Caption = 'Bicycle';
-    DataClassification = ToBeClassified;
-
-    fields
-    {
-        field(1; "No."; Code[20])
-        {
-            Caption = 'No.';
-            NotBlank = true;
-        }
-
-        field(2; "Rental Type Code"; Code[20])
-        {
-            Caption = 'Rental Type Code';
-            TableRelation = "Rental Type".Code;
-
-            trigger OnValidate()
-            var
-                RentalType: Record "Rental Type";
-            begin
-                if RentalType.Get("Rental Type Code") then
-                    Description := RentalType.Description;
-            end;
-        }
-
-        field(3; Description; Text[100])
-        {
-            Caption = 'Description';
-        }
-
-        field(4; Status; Enum "Bicycle Status")
-        {
-            Caption = 'Status';
-            InitValue = Available;
-        }
-
-        field(5; "Purchase Date"; Date)
-        {
-            Caption = 'Purchase Date';
-        }
-
-        field(6; "Purchase Price"; Decimal)
-        {
-            Caption = 'Purchase Price';
-
-            trigger OnValidate()
-            begin
-                if "Purchase Price" < 0 then
-                    Error('Purchase Price cannot be negative.');
-            end;
-        }
-
-        field(7; "Current Location"; Text[50])
-        {
-            Caption = 'Current Location';
-        }
-
-        field(8; "Last Service Date"; Date)
-        {
-            Caption = 'Last Service Date';
-        }
-    }
-
-    keys
-    {
-        key(PK; "No.")
-        {
-            Clustered = true;
-        }
-    }
-}
->>>>>>> bf1e63840ca6977a55f64fc506860ab3392cd86b
