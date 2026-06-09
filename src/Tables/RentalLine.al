@@ -33,13 +33,13 @@ table 50103 "Rental Line"
                     if Bicycle.Status <> Bicycle.Status::Available then
                         Error('Bicycle %1 is not available for rental.', "Bicycle No.");
                     Description := Bicycle.Description;
-
+                    
                     if not RentalHeader.Get("Rental No.") then
                         Error('Rental Header %1 not found.', "Rental No.");
 
                     if Bicycle."Rental Type Code" = '' then
                         Error('Bicycle %1 has no Rental Type assigned.', "Bicycle No.");
-
+                    
                     PriceList.SetRange("Rental Type Code", Bicycle."Rental Type Code");
                     PriceList.SetFilter("Starting Date", '<=%1', RentalHeader."Rental Date");
                     PriceList.SetFilter("Ending Date", '>=%1', RentalHeader."Rental Date");

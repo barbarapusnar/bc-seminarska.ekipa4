@@ -43,7 +43,7 @@ table 50104 "Rental Price List"
                 ValidateDates();
                 CheckOverLap();
             end;
-        }
+        } 
 
         field(6; "Daily Rate"; Decimal)
         {
