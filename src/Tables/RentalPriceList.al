@@ -43,7 +43,7 @@ table 50104 "Rental Price List"
                 ValidateDates();
                 CheckOverLap();
             end;
-        } 
+        }
 
         field(6; "Daily Rate"; Decimal)
         {
@@ -61,7 +61,7 @@ table 50104 "Rental Price List"
     begin
         if ("Starting Date" <> 0D) and ("Ending Date" <> 0D) then
             if "Starting Date" > "Ending Date" then
-                Error('Starting Date must be earlier than or equal to Ending Date.')
+                Error('Starting Date must be earlier than or equal to Ending Date.');
     end;
 
     local procedure CheckOverLap()
@@ -77,7 +77,7 @@ table 50104 "Rental Price List"
                 if PriceList.Code <> Code then
                     if (PriceList."Starting Date" <= "Ending Date") and
                         (PriceList."Ending Date" >= "Starting Date") then
-                        Error('A price list for this Rental Type already exists in this period');
+                        Error('A price list for this Rental Type already exists in this period.');
             until PriceList.Next() = 0;
     end;
 }
