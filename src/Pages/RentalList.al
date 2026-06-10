@@ -28,8 +28,8 @@ page 50104 "Rental List"
             {
                 Caption = 'Open Card';
                 ApplicationArea = All;
-                RunObject = page "Rental Card";
-                RunPageLink = "No." = field("No.");
+                Image = Report;
+                RunObject = report "Rental Report";
             }
         }
     }
