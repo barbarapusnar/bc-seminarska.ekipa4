@@ -56,6 +56,20 @@ page 50105 "Rental Card"
                     RentalMgt.ProcessReturn(Rec);
                 end;
             }
+
+            action(CreateSalesInvoice)
+            {
+                Caption = 'Create Sales Invoice';
+                ApplicationArea = All;
+                Image = Invoice;
+
+                trigger OnAction()
+                var
+                    RentalMgt: Codeunit "Rental Management";
+                begin
+                    RentalMgt.CreateSalesInvoice(Rec);
+                end;
+            }
         }
     }
 }

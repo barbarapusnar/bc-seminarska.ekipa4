@@ -60,4 +60,57 @@ codeunit 50100 "Rental Management"
         RentalHeader.Status := RentalHeader.Status::Returned;
         RentalHeader.Modify();
     end;
+
+    procedure CreateSalesInvoice(var RentalHeader: Record "Rental Header")
+    var
+        SalesHeader: Record "Sales Header";
+        SalesLine: Record "Sales Line";
+        RentalLine: Record "Rental Line";
+        LineNo: Integer;
+    begin
+        SalesHeader.Init();
+        SalesHeader."Document Type" := SalesHeader."Document Type"::Invoice;
+        SalesHeader."Sell-to Customer No." := RentalHeader."Customer No.";
+        SalesHeader."Posting Date" := Today;
+        SalesHeader.Insert(true);
+
+        LineNo := 10000;
+        RentalLine.SetRange("Rental No.", RentalHeader."No.");
+        if RentalLine.FindSet() then
+            repeat
+                SalesLine.Init();
+                SalesLine."Document Type" := SalesHeader."Document Type";
+                SalesLine."Document No." := SalesHeader."No.";
+                SalesLine."Line No." := LineNo;
+                SalesLine.Type := SalesLine.Type::Item;
+                SalesLine."No." := 'RENTAL';
+                SalesLine.Description := RentalLine.Description;
+                SalesLine.Quantity := RentalLine."Rental Days";
+                SalesLine."Unit Price" := RentalLine."Daily Rate";
+                SalesLine.Insert(true);
+                LineNo += 10000;
+            until RentalLine.Next() = 0;
+
+        Message('Sales Invoice %1 created successfully.', SalesHeader."No.");
+    end;
+
+    local procedure CheckMaxActiveRentals(CustomerNo: Code[20])
+    var
+        RentalHeader: Record "Rental Header";
+        Customer: Record Customer;
+        ActiveCount: Integer;
+    begin
+        if not Customer.Get(CustomerNo) then
+            exit;
+
+        if Customer."Max Active Rentals" = 0 then
+            exit;
+
+        RentalHeader.SetRange("Customer No.", CustomerNo);
+        RentalHeader.SetRange(Status, RentalHeader.Status::Active);
+        ActiveCount := RentalHeader.Count();
+
+        if ActiveCount >= Customer."Max Active Rentals" then
+            Error('Stranka je že dosegla maksimalno dovoljeno število aktivnih izposoj.');
+    end;
 }
